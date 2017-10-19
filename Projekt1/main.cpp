@@ -27,6 +27,7 @@
 // with your rendering engine in your game engine.
 int main(int argc, char** argv)
 {
+	//komentarz
 	B2_NOT_USED(argc);
 	B2_NOT_USED(argv);
 
