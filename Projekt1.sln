@@ -1,0 +1,70 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26403.7
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Projekt1", "Projekt1\Projekt1.vcxproj", "{2E3283E2-B1B4-43D4-8BE1-16DA4F898348}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8B879240-E7A3-499A-8567-BE6DA14F7FD9}"
+	ProjectSection(SolutionItems) = preProject
+		Projekt1\Box2D\Dynamics\b2Body.cpp = Projekt1\Box2D\Dynamics\b2Body.cpp
+		Projekt1\Box2D\Dynamics\b2Body.h = Projekt1\Box2D\Dynamics\b2Body.h
+		Projekt1\Box2D\Dynamics\b2ContactManager.cpp = Projekt1\Box2D\Dynamics\b2ContactManager.cpp
+		Projekt1\Box2D\Dynamics\b2ContactManager.h = Projekt1\Box2D\Dynamics\b2ContactManager.h
+		Projekt1\Box2D\Dynamics\Joints\b2DistanceJoint.cpp = Projekt1\Box2D\Dynamics\Joints\b2DistanceJoint.cpp
+		Projekt1\Box2D\Dynamics\Joints\b2DistanceJoint.h = Projekt1\Box2D\Dynamics\Joints\b2DistanceJoint.h
+		Projekt1\Box2D\Dynamics\b2Fixture.cpp = Projekt1\Box2D\Dynamics\b2Fixture.cpp
+		Projekt1\Box2D\Dynamics\b2Fixture.h = Projekt1\Box2D\Dynamics\b2Fixture.h
+		Projekt1\Box2D\Dynamics\Joints\b2FrictionJoint.cpp = Projekt1\Box2D\Dynamics\Joints\b2FrictionJoint.cpp
+		Projekt1\Box2D\Dynamics\Joints\b2FrictionJoint.h = Projekt1\Box2D\Dynamics\Joints\b2FrictionJoint.h
+		Projekt1\Box2D\Dynamics\Joints\b2GearJoint.cpp = Projekt1\Box2D\Dynamics\Joints\b2GearJoint.cpp
+		Projekt1\Box2D\Dynamics\Joints\b2GearJoint.h = Projekt1\Box2D\Dynamics\Joints\b2GearJoint.h
+		Projekt1\Box2D\Dynamics\b2Island.cpp = Projekt1\Box2D\Dynamics\b2Island.cpp
+		Projekt1\Box2D\Dynamics\b2Island.h = Projekt1\Box2D\Dynamics\b2Island.h
+		Projekt1\Box2D\Dynamics\Joints\b2Joint.cpp = Projekt1\Box2D\Dynamics\Joints\b2Joint.cpp
+		Projekt1\Box2D\Dynamics\Joints\b2Joint.h = Projekt1\Box2D\Dynamics\Joints\b2Joint.h
+		Projekt1\Box2D\Dynamics\Joints\b2MotorJoint.cpp = Projekt1\Box2D\Dynamics\Joints\b2MotorJoint.cpp
+		Projekt1\Box2D\Dynamics\Joints\b2MotorJoint.h = Projekt1\Box2D\Dynamics\Joints\b2MotorJoint.h
+		Projekt1\Box2D\Dynamics\Joints\b2MouseJoint.cpp = Projekt1\Box2D\Dynamics\Joints\b2MouseJoint.cpp
+		Projekt1\Box2D\Dynamics\Joints\b2MouseJoint.h = Projekt1\Box2D\Dynamics\Joints\b2MouseJoint.h
+		Projekt1\Box2D\Dynamics\Joints\b2PrismaticJoint.cpp = Projekt1\Box2D\Dynamics\Joints\b2PrismaticJoint.cpp
+		Projekt1\Box2D\Dynamics\Joints\b2PrismaticJoint.h = Projekt1\Box2D\Dynamics\Joints\b2PrismaticJoint.h
+		Projekt1\Box2D\Dynamics\Joints\b2PulleyJoint.cpp = Projekt1\Box2D\Dynamics\Joints\b2PulleyJoint.cpp
+		Projekt1\Box2D\Dynamics\Joints\b2PulleyJoint.h = Projekt1\Box2D\Dynamics\Joints\b2PulleyJoint.h
+		Projekt1\Box2D\Dynamics\Joints\b2RevoluteJoint.cpp = Projekt1\Box2D\Dynamics\Joints\b2RevoluteJoint.cpp
+		Projekt1\Box2D\Dynamics\Joints\b2RevoluteJoint.h = Projekt1\Box2D\Dynamics\Joints\b2RevoluteJoint.h
+		Projekt1\Box2D\Rope\b2Rope.h = Projekt1\Box2D\Rope\b2Rope.h
+		Projekt1\Box2D\Dynamics\Joints\b2RopeJoint.cpp = Projekt1\Box2D\Dynamics\Joints\b2RopeJoint.cpp
+		Projekt1\Box2D\Dynamics\Joints\b2RopeJoint.h = Projekt1\Box2D\Dynamics\Joints\b2RopeJoint.h
+		Projekt1\Box2D\Dynamics\b2TimeStep.h = Projekt1\Box2D\Dynamics\b2TimeStep.h
+		Projekt1\Box2D\Dynamics\Joints\b2WeldJoint.cpp = Projekt1\Box2D\Dynamics\Joints\b2WeldJoint.cpp
+		Projekt1\Box2D\Dynamics\Joints\b2WeldJoint.h = Projekt1\Box2D\Dynamics\Joints\b2WeldJoint.h
+		Projekt1\Box2D\Dynamics\Joints\b2WheelJoint.cpp = Projekt1\Box2D\Dynamics\Joints\b2WheelJoint.cpp
+		Projekt1\Box2D\Dynamics\Joints\b2WheelJoint.h = Projekt1\Box2D\Dynamics\Joints\b2WheelJoint.h
+		Projekt1\Box2D\Dynamics\b2World.cpp = Projekt1\Box2D\Dynamics\b2World.cpp
+		Projekt1\Box2D\Dynamics\b2World.h = Projekt1\Box2D\Dynamics\b2World.h
+		Projekt1\Box2D\Dynamics\b2WorldCallbacks.cpp = Projekt1\Box2D\Dynamics\b2WorldCallbacks.cpp
+		Projekt1\Box2D\Dynamics\b2WorldCallbacks.h = Projekt1\Box2D\Dynamics\b2WorldCallbacks.h
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2E3283E2-B1B4-43D4-8BE1-16DA4F898348}.Debug|x64.ActiveCfg = Debug|x64
+		{2E3283E2-B1B4-43D4-8BE1-16DA4F898348}.Debug|x64.Build.0 = Debug|x64
+		{2E3283E2-B1B4-43D4-8BE1-16DA4F898348}.Debug|x86.ActiveCfg = Debug|Win32
+		{2E3283E2-B1B4-43D4-8BE1-16DA4F898348}.Debug|x86.Build.0 = Debug|Win32
+		{2E3283E2-B1B4-43D4-8BE1-16DA4F898348}.Release|x64.ActiveCfg = Release|x64
+		{2E3283E2-B1B4-43D4-8BE1-16DA4F898348}.Release|x64.Build.0 = Release|x64
+		{2E3283E2-B1B4-43D4-8BE1-16DA4F898348}.Release|x86.ActiveCfg = Release|Win32
+		{2E3283E2-B1B4-43D4-8BE1-16DA4F898348}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
