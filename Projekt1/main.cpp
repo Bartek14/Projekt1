@@ -56,13 +56,46 @@ int main(int argc, char** argv)
 	int32 myPositonIterations = 2;
 
 	//game loop
-	for (int32 i = 0; i < 100; ++i)
+	for (int32 i = 0; i < 59; ++i)
 	{
 		myWorld.Step(timeStep, myVelocityIterations, myPositonIterations);
 		b2Vec2 myPosition = myDynamicBody->GetPosition();
 		float32 myAngle = myDynamicBody->GetAngle();
 		printf("%4.2f %4.2f %4.2f\n", myPosition.x, myPosition.y, myAngle);
 	}
+	printf("----------------------------------------------------");
+	//shapes
+
+	//circle
+
+
+	b2BodyDef circleBodyDef;
+	circleBodyDef.position.Set(3.0f, 5.0f);
+	circleBodyDef.type = b2_dynamicBody;
+	b2Body* dynamicCircle = myWorld.CreateBody(&circleBodyDef);
+	
+	b2CircleShape myCircle;
+	myCircle.m_p.Set(10.0f, 3.5f);
+	myCircle.m_radius = 1.0f;
+
+
+	b2FixtureDef circleFixtureDef;
+	circleFixtureDef.shape = &myCircle;
+	circleFixtureDef.density = 3.0f;
+	circleFixtureDef.friction = 0.6f;
+
+	dynamicCircle->CreateFixture(&circleFixtureDef);
+
+	for (int k = 0; k < 59; k++)
+	{
+		myWorld.Step(timeStep, myVelocityIterations, myPositonIterations);
+		b2Vec2 circlePosition = dynamicCircle->GetPosition();
+		float32 circleAngle = dynamicCircle->GetAngle();
+		printf("%4.2f %4.2f %4.2f\n", circlePosition.x, circlePosition.y, circleAngle);
+	}
+
+
+
 	getchar();
 
 	return 0;
