@@ -16,13 +16,13 @@ int main(int argc, char** argv)
 	// ground body definition
 	b2BodyDef myGroundBodyDef;
 	// setting initial position for body
-	myGroundBodyDef.position.Set(10.f, -15.0f);
+	myGroundBodyDef.position.Set(0.0f, -10.0f);
 	// passed definition to the world
 	b2Body* myGroundBody = myWorld.CreateBody(&myGroundBodyDef);
 	//creating a ground polygon
 	b2PolygonShape myGroundBox;
 	//setting width (2x30) and height (2x20)
-	myGroundBox.SetAsBox(30.0f, 20.0f);
+	myGroundBox.SetAsBox(50.0f, 10.0f);
 	//creating fixture with a shortcut 'cause we do not need any specific properties (density, mass, ect.)  to this body
 	myGroundBody->CreateFixture(&myGroundBox, 0.0f);
 
@@ -31,7 +31,7 @@ int main(int argc, char** argv)
 	//same as above
 	b2BodyDef myDynamicBodyDef;
 	myDynamicBodyDef.type = b2_dynamicBody;
-	myDynamicBodyDef.position.Set(10.0f, -10.0f);
+	myDynamicBodyDef.position.Set(0.0f, 4.0f);
 	b2Body* myDynamicBody = myWorld.CreateBody(&myDynamicBodyDef);
 
 	//creating the box shape
@@ -63,19 +63,19 @@ int main(int argc, char** argv)
 		float32 myAngle = myDynamicBody->GetAngle();
 		printf("%4.2f %4.2f %4.2f\n", myPosition.x, myPosition.y, myAngle);
 	}
-	printf("----------------------------------------------------");
+	printf("----------------------------------------------------\n");
 	//shapes
 
 	//circle
 
 
 	b2BodyDef circleBodyDef;
-	circleBodyDef.position.Set(3.0f, 5.0f);
+	circleBodyDef.position.Set(0.0f, -9.0f);
 	circleBodyDef.type = b2_dynamicBody;
 	b2Body* dynamicCircle = myWorld.CreateBody(&circleBodyDef);
 	
 	b2CircleShape myCircle;
-	myCircle.m_p.Set(10.0f, 3.5f);
+	myCircle.m_p.Set(10.0f, 3.0f);
 	myCircle.m_radius = 1.0f;
 
 
