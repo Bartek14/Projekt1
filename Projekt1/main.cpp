@@ -8,11 +8,18 @@ int main(int argc, char** argv)
 {
 	/////////////Graphics
 
-
+	float32 dynamicRectPositionX = 30;
+	float32 dynamicRectPositionY = 20;
+	float32 groundRectPositionX = 30;
+	float32 groundRectPositionY = 200;
 	sf::RenderWindow window(sf::VideoMode(400, 400), "SFML works!");
-	sf::RectangleShape groundRect(sf::Vector2f(15, 15));
-	groundRect.setFillColor(sf::Color::Green);
-	groundRect.setPosition(0, 0);
+	sf::RectangleShape dynamicRect(sf::Vector2f(15, 15));
+	dynamicRect.setFillColor(sf::Color::Green);
+	dynamicRect.setPosition(dynamicRectPositionX, dynamicRectPositionY);
+
+	sf::RectangleShape groundRect(sf::Vector2f(60, 10));
+	groundRect.setFillColor(sf::Color::Blue);
+	groundRect.setPosition(groundRectPositionX, groundRectPositionY);
 	int iterator(0);
 
 	
@@ -20,7 +27,7 @@ int main(int argc, char** argv)
 
 
 	//gravity vector;
-	b2Vec2 myGravity(0.0f, -10.0f );
+	b2Vec2 myGravity(0.0f, 10.0f );
 	//adding gravity to my world;
 	b2World myWorld(myGravity);
 
@@ -29,13 +36,13 @@ int main(int argc, char** argv)
 	// ground body definition
 	b2BodyDef myGroundBodyDef;
 	// setting initial position for body
-	myGroundBodyDef.position.Set(0.0f, -10.0f);			//NIE ROZUMIEM CZEMU PRZY POZYCJI POD£OGI -10 ŒRODEK OBJEKTU ZATRZYMUJE SIE NA Y=25.0!!
+	myGroundBodyDef.position.Set(groundRectPositionX, groundRectPositionY);
 	// passed definition to the world
 	b2Body* myGroundBody = myWorld.CreateBody(&myGroundBodyDef);
 	//creating a ground polygon
 	b2PolygonShape myGroundBox;
-	//setting width (2x50) and height (2x30)
-	myGroundBox.SetAsBox(50.0f, 20.0f);
+	//setting width (2x30) and height (2x5)
+	myGroundBox.SetAsBox(30.0f, 5.0f);
 	//creating fixture with a shortcut 'cause we do not need any specific properties (density, mass, ect.)  to this body
 	myGroundBody->CreateFixture(&myGroundBox, 0.0f);
 
@@ -78,7 +85,7 @@ int main(int argc, char** argv)
 		}
 		//game loop
 		//for (int32 i = 0; i < 59; ++i)
-		while (iterator<90)
+		while (iterator<360)
 		{
 		
 			myWorld.Step(timeStep, myVelocityIterations, myPositonIterations);
@@ -89,11 +96,12 @@ int main(int argc, char** argv)
 
 			//Graphics
 
-			groundRect.setPosition(myPosition.x, myPosition.y);
+			dynamicRect.setPosition(myPosition.x, myPosition.y);
 			iterator++;
 		}
 
 		window.clear();
+		window.draw(dynamicRect);
 		window.draw(groundRect);
 		window.display();
 	}
