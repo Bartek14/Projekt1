@@ -8,17 +8,17 @@ int main(int argc, char** argv)
 {
 	/////////////Graphics
 
-	float32 dynamicRectPositionX = 30;
-	float32 dynamicRectPositionY = 20;
-	float32 groundRectPositionX = 30;
-	float32 groundRectPositionY = 200;
+	float32 dynamicRectPositionX = 0;
+	float32 dynamicRectPositionY = 0;
+	float32 groundRectPositionX = 0;
+	float32 groundRectPositionY = 300;
 	sf::RenderWindow window(sf::VideoMode(400, 400), "SFML works!");
-	sf::RectangleShape dynamicRect(sf::Vector2f(15, 15));
+	sf::RectangleShape dynamicRect(sf::Vector2f(100, 100));
 	dynamicRect.setFillColor(sf::Color::Green);
 	dynamicRect.setPosition(dynamicRectPositionX, dynamicRectPositionY);
 
-	sf::RectangleShape groundRect(sf::Vector2f(60, 10));
-	groundRect.setFillColor(sf::Color::Blue);
+	sf::RectangleShape groundRect(sf::Vector2f(100, 100));
+	groundRect.setFillColor(sf::Color::Red);
 	groundRect.setPosition(groundRectPositionX, groundRectPositionY);
 	int iterator(0);
 
@@ -42,7 +42,7 @@ int main(int argc, char** argv)
 	//creating a ground polygon
 	b2PolygonShape myGroundBox;
 	//setting width (2x30) and height (2x5)
-	myGroundBox.SetAsBox(30.0f, 5.0f);
+	myGroundBox.SetAsBox(50.0f, 50.0f);
 	//creating fixture with a shortcut 'cause we do not need any specific properties (density, mass, ect.)  to this body
 	myGroundBody->CreateFixture(&myGroundBox, 0.0f);
 
@@ -51,12 +51,12 @@ int main(int argc, char** argv)
 	//same as above
 	b2BodyDef myDynamicBodyDef;
 	myDynamicBodyDef.type = b2_dynamicBody;
-	myDynamicBodyDef.position.Set(0.0f, 0.0f);		
+	myDynamicBodyDef.position.Set(dynamicRectPositionX, dynamicRectPositionY);
 	b2Body* myDynamicBody = myWorld.CreateBody(&myDynamicBodyDef);
 
 	//creating the box shape
 	b2PolygonShape myDynamicBox;
-	myDynamicBox.SetAsBox(15.0f, 15.0f);
+	myDynamicBox.SetAsBox(100.0f, 100.0f);
 	//creating fixture definition using the box
 	b2FixtureDef myFixtureDef;
 	myFixtureDef.shape = &myDynamicBox;
@@ -85,7 +85,7 @@ int main(int argc, char** argv)
 		}
 		//game loop
 		//for (int32 i = 0; i < 59; ++i)
-		while (iterator<360)
+		while (iterator<400)
 		{
 		
 			myWorld.Step(timeStep, myVelocityIterations, myPositonIterations);
@@ -98,6 +98,11 @@ int main(int argc, char** argv)
 
 			dynamicRect.setPosition(myPosition.x, myPosition.y);
 			iterator++;
+			//displaying
+			window.clear();
+			window.draw(dynamicRect);
+			window.draw(groundRect);
+			window.display();
 		}
 
 		window.clear();
