@@ -56,7 +56,7 @@ int main(int argc, char** argv)
 
 	//creating the box shape
 	b2PolygonShape myDynamicBox;
-	myDynamicBox.SetAsBox(100.0f, 100.0f);
+	myDynamicBox.SetAsBox(50.0f, 50.0f);
 	//creating fixture definition using the box
 	b2FixtureDef myFixtureDef;
 	myFixtureDef.shape = &myDynamicBox;
