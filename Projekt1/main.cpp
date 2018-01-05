@@ -27,7 +27,7 @@ int main(int argc, char** argv)
 	{
 		0,
 		300,
-		100,
+		500,
 		100,
 	};
 	float32 dynamicRectPositionX = 0;
@@ -45,8 +45,11 @@ int main(int argc, char** argv)
 	//int iterator(0);
 	//int temp;
 	
-	//b2Vec2 myForce(1.0f, 0.0f);
-
+	b2Vec2 rightForce(1.0f, 0.0f);
+	b2Vec2 leftForce(-1.0f, 0.0f);
+	b2Vec2 upForce(0.0f, -1.0f);
+	b2Vec2 downForce(0.0f, 1.0f);
+	b2Vec2 stopForce(0.0f, 0.0f);
 
 	//gravity vector;
 	b2Vec2 myGravity(0.0f, 0.5f);
@@ -110,6 +113,7 @@ int main(int argc, char** argv)
 		}
 		//game loop
 		//for (int32 i = 0; i < 59; ++i)
+		sf::Event move;
 		while (sf::Keyboard::isKeyPressed)
 		{
 		
@@ -117,6 +121,18 @@ int main(int argc, char** argv)
 			b2Vec2 myPosition = myDynamicBody->GetPosition();
 			float32 myAngle = myDynamicBody->GetAngle();
 			printf("%4.2f %4.2f %4.2f\n", myPosition.x, myPosition.y, myAngle);
+
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+				myDynamicBody->SetLinearVelocity(rightForce);
+			
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+				myDynamicBody->SetLinearVelocity(leftForce);
+			
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+				myDynamicBody->SetLinearVelocity(upForce);
+			
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+				myDynamicBody->SetLinearVelocity(downForce);
 
 
 			//Graphics
