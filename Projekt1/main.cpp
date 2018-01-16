@@ -20,8 +20,8 @@ int main(int argc, char** argv)
 	{
 		0,
 		0,
-		100,
-		100,
+		20,
+		20,
 	};
 	coOrdinates groundRectCoordinates =
 	{
@@ -30,10 +30,7 @@ int main(int argc, char** argv)
 		500,
 		100,
 	};
-	float32 dynamicRectPositionX = 0;
-	float32 dynamicRectPositionY = 0;
-	float32 groundRectPositionX = 0;
-	float32 groundRectPositionY = 300;
+
 	sf::RenderWindow window(sf::VideoMode(400, 400), "SFML works!");
 	sf::RectangleShape dynamicRect(sf::Vector2f(dynamicRectCoordinates.width, dynamicRectCoordinates.height));
 	dynamicRect.setFillColor(sf::Color::Green);
@@ -79,17 +76,17 @@ int main(int argc, char** argv)
 	//same as above
 	b2BodyDef myDynamicBodyDef;
 	myDynamicBodyDef.type = b2_dynamicBody;
-	myDynamicBodyDef.position.Set(dynamicRectPositionX, dynamicRectPositionY);
+	myDynamicBodyDef.position.Set(dynamicRectCoordinates.x, dynamicRectCoordinates.y);
 	b2Body* myDynamicBody = myWorld.CreateBody(&myDynamicBodyDef);
 
 	//creating the box shape
 	b2PolygonShape myDynamicBox;
-	myDynamicBox.SetAsBox(dynamicRectCoordinates.width/2, dynamicRectCoordinates.height/2);
+	myDynamicBox.SetAsBox((dynamicRectCoordinates.width)/2, (dynamicRectCoordinates.height)/2);
 	//creating fixture definition using the box
 	b2FixtureDef myFixtureDef;
 	myFixtureDef.shape = &myDynamicBox;
 	myFixtureDef.density = 1.0f;
-	myFixtureDef.friction = 90.0f;
+	myFixtureDef.friction = 1.0f;
 
 	//creating fixture
 	myDynamicBody->CreateFixture(&myFixtureDef);
@@ -113,7 +110,6 @@ int main(int argc, char** argv)
 		}
 		//game loop
 		//for (int32 i = 0; i < 59; ++i)
-		sf::Event move;
 		while (sf::Keyboard::isKeyPressed)
 		{
 		
