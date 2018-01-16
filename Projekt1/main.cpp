@@ -20,25 +20,25 @@ int main(int argc, char** argv)
 	{
 		0,
 		0,
-		20,
-		20,
+		10,
+		10,
 	};
 	coOrdinates groundRectCoordinates =
 	{
-		0,
-		300,
-		500,
+		50,
 		100,
+		50,
+		50,
 	};
 
 	sf::RenderWindow window(sf::VideoMode(400, 400), "SFML works!");
 	sf::RectangleShape dynamicRect(sf::Vector2f(dynamicRectCoordinates.width, dynamicRectCoordinates.height));
 	dynamicRect.setFillColor(sf::Color::Green);
-	dynamicRect.setPosition(dynamicRectCoordinates.x, dynamicRectCoordinates.y);
+	dynamicRect.setPosition(dynamicRectCoordinates.x - dynamicRectCoordinates.width/2, dynamicRectCoordinates.y- dynamicRectCoordinates.height/2);
 
 	sf::RectangleShape groundRect(sf::Vector2f(groundRectCoordinates.width, groundRectCoordinates.height));
 	groundRect.setFillColor(sf::Color::Red);
-	groundRect.setPosition(groundRectCoordinates.x, groundRectCoordinates.y);
+	groundRect.setPosition(groundRectCoordinates.x - groundRectCoordinates.width / 2, groundRectCoordinates.y - groundRectCoordinates.height / 2);
 	//int iterator(0);
 	//int temp;
 	
@@ -125,10 +125,13 @@ int main(int argc, char** argv)
 				myDynamicBody->SetLinearVelocity(leftForce);
 			
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+				for(int i=0; i<4; ++i)
 				myDynamicBody->SetLinearVelocity(upForce);
 			
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 				myDynamicBody->SetLinearVelocity(downForce);
+
+			
 
 
 			//Graphics
