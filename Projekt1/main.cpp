@@ -39,8 +39,7 @@ int main(int argc, char** argv)
 	sf::RectangleShape groundRect(sf::Vector2f(groundRectCoordinates.width, groundRectCoordinates.height));
 	groundRect.setFillColor(sf::Color::Red);
 	groundRect.setPosition(groundRectCoordinates.x - groundRectCoordinates.width / 2, groundRectCoordinates.y - groundRectCoordinates.height / 2);
-	//int iterator(0);
-	//int temp;
+
 	
 	b2Vec2 rightForce(1.0f, 0.0f);
 	b2Vec2 leftForce(-1.0f, 0.0f);
@@ -48,14 +47,14 @@ int main(int argc, char** argv)
 	b2Vec2 downForce(0.0f, 1.0f);
 	b2Vec2 stopForce(0.0f, 0.0f);
 
+	b2Vec2 centre(dynamicRectCoordinates.x + dynamicRectCoordinates.width / 2, dynamicRectCoordinates.y + dynamicRectCoordinates.height / 2);
+	float32 angle1 = 0.0f;
+
 	//gravity vector;
 	b2Vec2 myGravity(0.0f, 0.5f);
 	//adding gravity to my world;
 	b2World myWorld(myGravity);
-
-	//changing angle
-	//b2Vec2 myAngle(50.0f, 50.0f);
-
+	
 	//creating a static body (they are static by default)
 
 	// ground body definition
@@ -81,12 +80,12 @@ int main(int argc, char** argv)
 
 	//creating the box shape
 	b2PolygonShape myDynamicBox;
-	myDynamicBox.SetAsBox((dynamicRectCoordinates.width)/2, (dynamicRectCoordinates.height)/2);
+	myDynamicBox.SetAsBox((dynamicRectCoordinates.width)/2, (dynamicRectCoordinates.height)/2, centre, angle1);
 	//creating fixture definition using the box
 	b2FixtureDef myFixtureDef;
 	myFixtureDef.shape = &myDynamicBox;
 	myFixtureDef.density = 1.0f;
-	myFixtureDef.friction = 1.0f;
+	myFixtureDef.friction = 0.3f;
 
 	//creating fixture
 	myDynamicBody->CreateFixture(&myFixtureDef);
@@ -137,6 +136,7 @@ int main(int argc, char** argv)
 			//Graphics
 
 			dynamicRect.setPosition(myPosition.x, myPosition.y);
+			dynamicRect.setRotation(myAngle*(180/3.14));
 			//iterator++;
 			//displaying
 			window.clear();
