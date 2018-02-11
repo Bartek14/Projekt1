@@ -3,17 +3,12 @@
 #include <SFML/Graphics.hpp>
 #include <stdio.h>
 
+#include "Localisation.hpp"
+
 
 int main(int argc, char** argv)
 {
-	struct coOrdinates
-	{
-		float32 x = 0;
-		float32 y = 0;
-		float32 width = 0;
-		float32 height = 0;
 
-	};
 	/////////////Graphics
 
 	coOrdinates dynamicRectCoordinates =
@@ -41,10 +36,10 @@ int main(int argc, char** argv)
 	groundRect.setPosition(groundRectCoordinates.x - groundRectCoordinates.width / 2, groundRectCoordinates.y - groundRectCoordinates.height / 2);
 
 	
-	b2Vec2 rightForce(1.0f, 0.0f);
-	b2Vec2 leftForce(-1.0f, 0.0f);
-	b2Vec2 upForce(0.0f, -1.0f);
-	b2Vec2 downForce(0.0f, 1.0f);
+	b2Vec2 rightForce(2.0f, 0.0f);
+	b2Vec2 leftForce(-2.0f, 0.0f);
+	b2Vec2 upForce(0.0f, -2.0f);
+	b2Vec2 downForce(0.0f, 2.0f);
 	b2Vec2 stopForce(0.0f, 0.0f);
 
 	b2Vec2 centre(dynamicRectCoordinates.x + dynamicRectCoordinates.width / 2, dynamicRectCoordinates.y + dynamicRectCoordinates.height / 2);

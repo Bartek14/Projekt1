@@ -323,8 +323,5 @@
     <ClInclude Include="Box2D\Collision\Shapes\b2Shape.h">
       <Filter>Box2D\Collision\Shapes</Filter>
     </ClInclude>
-    <ClInclude Include="..\Rect.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>
