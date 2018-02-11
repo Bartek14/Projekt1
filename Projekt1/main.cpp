@@ -70,16 +70,22 @@ int main(int argc, char** argv)
 	//creating fixture with a shortcut 'cause we do not need any specific properties (density, mass, ect.)  to this body
 	myGroundBody->CreateFixture(&myGroundBox, 0.0f);
 
+	//creating dynamic body definition
+	b2BodyDef dynamicBodyDef;
+	
+	dynamicBodyDef.type = b2_dynamicBody;
+	dynamicBodyDef.position.Set(4.0f, 0.0f);
+	b2Body* myDynamicBody =myWorld.CreateBody(&dynamicBodyDef);
+
 	//creating a dynamic body in vertices
 
-	b2Vec2 vertices[5];
+	b2Vec2 vertices[3];
 	vertices[0].Set(0.0f, 0.0f);
 	vertices[1].Set(0.0f, 1.0f);
 	vertices[2].Set(0.5f, 1.5f);
-	vertices[3].Set(1.0f, 1.0f);
-	vertices[4].Set(1.5f, 0.0f);
+	
 
-	int32 count = 5;
+	int32 count = 3;
 
 	//creating the box shape
 	b2PolygonShape DynamicBody;
@@ -87,10 +93,10 @@ int main(int argc, char** argv)
 	DynamicBody.SetAsBox((dynamicRectCoordinates.width) / 2, (dynamicRectCoordinates.height) / 2, centre, angle1);
 
 	//same as above
-	b2BodyDef myDynamicBodyDef;
-	myDynamicBodyDef.type = b2_dynamicBody;
-	myDynamicBodyDef.position.Set(dynamicRectCoordinates.x, dynamicRectCoordinates.y);
-	b2Body* myDynamicBody = myWorld.CreateBody(&myDynamicBodyDef);
+	//b2BodyDef myDynamicBodyDef;
+	//myDynamicBodyDef.type = b2_dynamicBody;
+	//myDynamicBodyDef.position.Set(dynamicRectCoordinates.x, dynamicRectCoordinates.y);
+	//b2Body* myDynamicBody = myWorld.CreateBody(&myDynamicBodyDef);
 
 
 	
@@ -99,10 +105,10 @@ int main(int argc, char** argv)
 	b2FixtureDef myFixtureDef;
 	myFixtureDef.shape = &DynamicBody;
 	myFixtureDef.density = 1.0f;
-	myFixtureDef.friction = 0.3f;
+	myFixtureDef.friction = 90.3f;
 
 	//creating fixture
-	DynamicBody->CreateFixture(&myFixtureDef);
+	myDynamicBody->CreateFixture(&myFixtureDef);
 
 	//creating a simulation
 
