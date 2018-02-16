@@ -3,31 +3,31 @@
 #include <SFML/Graphics.hpp>
 #include <stdio.h>
 
-#include "Localisation.hpp"
+#include "Localization.hpp"
 
 
 int main(int argc, char** argv)
 {
 
-	/////////////Graphics
-
-	coOrdinates dynamicRectCoordinates =
+	/////////////Graphic
+	dynamicRectCoordinates =
 	{
-		0,
+		19,
 		0,
 		10,
 		10,
 	};
-	coOrdinates groundRectCoordinates =
+
+	groundRectCoordinates =
 	{
 		50,
 		100,
 		50,
-		50,
+		60,
 	};
 
 	sf::RenderWindow window(sf::VideoMode(400, 400), "SFML works!");
-	sf::RectangleShape dynamicRect(sf::Vector2f(dynamicRectCoordinates.width, dynamicRectCoordinates.height));
+	sf::RectangleShape dynamicRect(sf::Vector2f((float)dynamicRectCoordinates.width, (float)dynamicRectCoordinates.height));
 	dynamicRect.setFillColor(sf::Color::Green);
 	dynamicRect.setPosition(dynamicRectCoordinates.x - dynamicRectCoordinates.width/2, dynamicRectCoordinates.y- dynamicRectCoordinates.height/2);
 
@@ -42,7 +42,9 @@ int main(int argc, char** argv)
 	b2Vec2 downForce(0.0f, 2.0f);
 	b2Vec2 stopForce(0.0f, 0.0f);
 
-	b2Vec2 centre(dynamicRectCoordinates.x + dynamicRectCoordinates.width / 2, dynamicRectCoordinates.y + dynamicRectCoordinates.height / 2);
+	centreX = dynamicRectCoordinates.width/2;
+	centreY = dynamicRectCoordinates.height/2;
+	b2Vec2 centre(centreX, centreY );
 	float32 angle1 = 0.0f;
 
 	//gravity vector;
@@ -60,7 +62,7 @@ int main(int argc, char** argv)
 	b2Body* myGroundBody = myWorld.CreateBody(&myGroundBodyDef);
 	//creating a ground polygon
 	b2PolygonShape myGroundBox;
-	//setting width (2x50) and height (2x50)
+	//setting width and height 
 	myGroundBox.SetAsBox(groundRectCoordinates.width/2, groundRectCoordinates.height/2);
 	//creating fixture with a shortcut 'cause we do not need any specific properties (density, mass, ect.)  to this body
 	myGroundBody->CreateFixture(&myGroundBox, 0.0f);
@@ -69,7 +71,7 @@ int main(int argc, char** argv)
 	b2BodyDef dynamicBodyDef;
 	
 	dynamicBodyDef.type = b2_dynamicBody;
-	dynamicBodyDef.position.Set(4.0f, 0.0f);
+	dynamicBodyDef.position.Set(dynamicRectCoordinates.x, dynamicRectCoordinates.y);
 	b2Body* myDynamicBody =myWorld.CreateBody(&dynamicBodyDef);
 
 	//creating a dynamic body in vertices
@@ -100,7 +102,7 @@ int main(int argc, char** argv)
 	b2FixtureDef myFixtureDef;
 	myFixtureDef.shape = &DynamicBody;
 	myFixtureDef.density = 1.0f;
-	myFixtureDef.friction = 90.3f;
+	myFixtureDef.friction = 0.3f;
 
 	//creating fixture
 	myDynamicBody->CreateFixture(&myFixtureDef);
@@ -151,7 +153,7 @@ int main(int argc, char** argv)
 			//Graphics
 
 			dynamicRect.setPosition(myPosition.x, myPosition.y);
-			dynamicRect.setRotation(myAngle*(180/3.14));
+			dynamicRect.setRotation(myAngle*(180.0f/3.14f));
 			//iterator++;
 			//displaying
 			window.clear();
@@ -198,4 +200,13 @@ int main(int argc, char** argv)
 	getchar();
 
 	return 0;
+}
+float32 LocalizeCentreX(float32 width)
+{
+	return width / 2;
+}
+
+float32 LocalizeCentreY(float32 height)
+{
+	return height / 2;
 }
