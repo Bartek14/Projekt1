@@ -41,13 +41,12 @@ int main(int argc, char** argv)
 	groundRect.setPosition(groundRectCoordinates.x - groundRectCoordinates.width / 2, groundRectCoordinates.y - groundRectCoordinates.height / 2);
 
 	
-	b2Vec2 rightForce(1.0f, 0.0f);
-	b2Vec2 leftForce(-1.0f, 0.0f);
-	b2Vec2 upForce(0.0f, -1.0f);
-	b2Vec2 downForce(0.0f, 1.0f);
-	b2Vec2 stopForce(0.0f, 0.0f);
+	b2Vec2 rightForce(2.0f, 0.0f);
+	b2Vec2 leftForce(-2.0f, 0.0f);
+	b2Vec2 upForce(0.0f, -2.0f);
+	b2Vec2 downForce(0.0f, 2.0f);
 
-	b2Vec2 centre(dynamicRectCoordinates.x + dynamicRectCoordinates.width / 2, dynamicRectCoordinates.y + dynamicRectCoordinates.height / 2);
+	b2Vec2 centre(dynamicRectCoordinates.width / 2, dynamicRectCoordinates.height / 2);
 	float32 angle1 = 0.0f;
 
 	//gravity vector;
@@ -70,30 +69,18 @@ int main(int argc, char** argv)
 	//creating fixture with a shortcut 'cause we do not need any specific properties (density, mass, ect.)  to this body
 	myGroundBody->CreateFixture(&myGroundBox, 0.0f);
 
-	//creating a dynamic body in vertices
-
-	b2Vec2 vertices[5];
-	vertices[0].Set(0.0f, 0.0f);
-	vertices[1].Set(0.0f, 1.0f);
-	vertices[2].Set(0.5f, 1.5f);
-	vertices[3].Set(1.0f, 1.0f);
-	vertices[4].Set(1.5f, 0.0f);
-
-	int32 count = 5;
 
 	//creating the box shape
-	b2PolygonShape DynamicBody;
-	DynamicBody.Set(vertices, count);
-	DynamicBody.SetAsBox((dynamicRectCoordinates.width) / 2, (dynamicRectCoordinates.height) / 2, centre, angle1);
-
+	
 	//same as above
 	b2BodyDef myDynamicBodyDef;
 	myDynamicBodyDef.type = b2_dynamicBody;
 	myDynamicBodyDef.position.Set(dynamicRectCoordinates.x, dynamicRectCoordinates.y);
 	b2Body* myDynamicBody = myWorld.CreateBody(&myDynamicBodyDef);
 
+	b2PolygonShape DynamicBody;
+	DynamicBody.SetAsBox((dynamicRectCoordinates.width) / 2, (dynamicRectCoordinates.height) / 2, centre, angle1);
 
-	
 
 	//creating fixture definition using the box
 	b2FixtureDef myFixtureDef;
@@ -102,7 +89,46 @@ int main(int argc, char** argv)
 	myFixtureDef.friction = 0.3f;
 
 	//creating fixture
-	DynamicBody->CreateFixture(&myFixtureDef);
+	myDynamicBody->CreateFixture(&myFixtureDef);
+
+	//NEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEW
+
+	b2BodyDef vertBodyDef;
+	vertBodyDef.type = b2_dynamicBody;
+	vertBodyDef.position.Set(30,30);
+	b2Body* vertDynamic = myWorld.CreateBody(&vertBodyDef);
+
+	b2Vec2 vertices[3];
+	vertices[0].Set(0.0f, 0.0f);
+	vertices[1].Set(1.0f, 0.0f);
+	vertices[2].Set(0.0f, 1.0f);
+	int32 count = 3;
+
+	b2PolygonShape vertPolygon;
+	vertPolygon.Set(vertices, count);
+	b2Vec2 dupa(0.5f, 0.5f);
+	vertPolygon.SetAsBox(0.5f, 0.5f, dupa, 0.0f);
+
+	b2FixtureDef vertFixture;
+	vertFixture.shape = &vertPolygon;
+	vertFixture.density = 1.0f;
+	myFixtureDef.friction = 0.5f;
+
+	vertDynamic->CreateFixture(&vertFixture);
+
+
+	sf::ConvexShape convex;
+
+	convex.setPointCount(3);
+
+	convex.setPoint(0, sf::Vector2f(0.0f, 0.0f));
+	convex.setPoint(1, sf::Vector2f(1.0f, 0.0f));
+	convex.setPoint(2, sf::Vector2f(0.0f, 1.0f));
+
+	convex.setFillColor(sf::Color::Blue);
+
+	convex.setPosition(50, 50);
+	//EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEND
 
 	//creating a simulation
 
@@ -127,9 +153,15 @@ int main(int argc, char** argv)
 		{
 		
 			myWorld.Step(timeStep, myVelocityIterations, myPositonIterations);
+
 			b2Vec2 myPosition = myDynamicBody->GetPosition();
 			float32 myAngle = myDynamicBody->GetAngle();
-			printf("%4.2f %4.2f %4.2f\n", myPosition.x, myPosition.y, myAngle);
+
+			b2Vec2 vertPosition = vertDynamic->GetPosition();
+			float32 vertAngle = vertDynamic->GetAngle();
+
+
+			printf("%4.2f %4.2f %4.2f %4.2f \n", myPosition.x, myPosition.y, myAngle, vertPosition.y);
 
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 				myDynamicBody->SetLinearVelocity(rightForce);
@@ -151,17 +183,23 @@ int main(int argc, char** argv)
 
 			dynamicRect.setPosition(myPosition.x, myPosition.y);
 			dynamicRect.setRotation(myAngle*(180/3.14));
+
+			convex.setPosition(vertPosition.x, vertPosition.y);
+			convex.setRotation(vertAngle*(180 / 3.14));
+
 			//iterator++;
 			//displaying
 			window.clear();
 			window.draw(dynamicRect);
 			window.draw(groundRect);
+			window.draw(convex);
 			window.display();
 		}
 
 		window.clear();
 		window.draw(dynamicRect);
 		window.draw(groundRect);
+		window.draw(convex);
 		window.display();
 	}
 	printf("----------------------------------------------------\n");
