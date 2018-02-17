@@ -127,7 +127,7 @@ int main(int argc, char** argv)
 
 	convex.setFillColor(sf::Color::Blue);
 
-	convex.setPosition(50, 50);
+	convex.setPosition(30, 30);
 	//EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEND
 
 	//creating a simulation
